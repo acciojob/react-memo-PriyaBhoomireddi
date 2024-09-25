@@ -1,17 +1,20 @@
 import React, { useMemo } from 'react';
 
-const UseMemoComponent = ({ tasks }) => {
-  // Calculate the number of tasks (example use of useMemo)
-  const taskCount = useMemo(() => {
-    return tasks.length;
-  }, [tasks]);
+// Example component demonstrating useMemo usage
+const UseMemo = ({ counter }) => {
+  const expensiveCalculation = (num) => {
+    console.log('Expensive calculation...');
+    return num * 2;
+  };
+
+  const memoizedValue = useMemo(() => expensiveCalculation(counter), [counter]);
 
   return (
     <div>
-      <h3>UseMemo Component</h3>
-      <p>Number of tasks: {taskCount}</p>
+      <h2>useMemo Example</h2>
+      <p>Memoized value (counter * 2): {memoizedValue}</p>
     </div>
   );
 };
 
-export default UseMemoComponent;
+export default UseMemo;

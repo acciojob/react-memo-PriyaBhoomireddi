@@ -1,13 +1,13 @@
 import React from 'react';
 
-const ReactMemoComponent = React.memo(({ counter }) => {
-  console.log('ReactMemoComponent rendered');
+// This component will only re-render if the 'skill' prop changes
+const ReactMemo = React.memo(({ skill }) => {
   return (
     <div>
-      <h3>React Memo Component</h3>
-      <p>Counter Value: {counter}</p>
+      <h2>React.memo Example</h2>
+      <p>Current skill: {skill}</p>
     </div>
   );
 });
 
-export default ReactMemoComponent;
+export default ReactMemo;
