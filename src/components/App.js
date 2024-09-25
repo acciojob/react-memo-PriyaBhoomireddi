@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import ReactMemo from './ReactMemo'; // For React.memo testing
-import UseMemo from './UseMemo'; // For useMemo testing
+import ReactMemo from './ReactMemo';
+import UseMemo from './UseMemo';     
 
 const App = () => {
   const [todos, setTodos] = useState([]);
