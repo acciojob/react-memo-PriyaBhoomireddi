@@ -1,17 +1,22 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
-const UseMemoComponent = ({ counter }) => {
-  const expensiveCalculation = useMemo(() => {
-    console.log('Calculating...');
-    return counter * 2;
-  }, [counter]);
+const UseMemoComponent = () => {
+    const [count, setCount] = useState(0);
 
-  return (
-    <div>
-      <h3>UseMemo Example</h3>
-      <p>Expensive calculation result: {expensiveCalculation}</p>
-    </div>
-  );
+    const expensiveCalculation = (num) => {
+        console.log("Calculating...");
+        return num * 2;
+    };
+
+    const result = useMemo(() => expensiveCalculation(count), [count]);
+
+    return (
+        <div>
+            <h2>UseMemo Example</h2>
+            <p>Result: {result}</p>
+            <button id="incr-cnt" onClick={() => setCount(count + 1)}>Increment Count</button>
+        </div>
+    );
 };
 
 export default UseMemoComponent;

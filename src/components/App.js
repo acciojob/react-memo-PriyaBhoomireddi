@@ -1,63 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import UseMemoComponent from './UseMemo';
 import ReactMemoComponent from './ReactMemo';
 
-const App = () => {
-  const [todos, setTodos] = useState([]);
-  const [counter, setCounter] = useState(0);
-  const [customTask, setCustomTask] = useState('');
+class App extends Component {
+    state = {
+        counter: 0,
+        todos: ['Initial todo']
+    };
 
-  // Add a new todo task "New todo"
-  const addTodo = () => {
-    setTodos([...todos, 'New todo']);
-  };
+    handleAddTodo = () => {
+        this.setState((prevState) => ({
+            todos: [...prevState.todos, 'New todo']
+        }));
+    };
 
-  // Increment the counter
-  const incrementCounter = () => {
-    setCounter(counter + 1);
-  };
+    handleIncrement = () => {
+        this.setState((prevState) => ({
+            counter: prevState.counter + 1
+        }));
+    };
 
-  // Handle custom task input
-  const handleCustomTaskInput = (e) => {
-    setCustomTask(e.target.value);
-  };
+    render() {
+        return (
+            <div>
+                <h1>React Memo Assignment</h1>
+                <button id="add-todo-btn" onClick={this.handleAddTodo}>Add Todo</button>
+                <button id="incr-cnt" onClick={this.handleIncrement}>Increment</button>
+                <ul>
+                    {this.state.todos.map((todo, index) => (
+                        <li key={index}>{todo}</li>
+                    ))}
+                </ul>
+                <p>Counter: {this.state.counter}</p>
 
-  // Add custom task to the list
-  const submitCustomTask = () => {
-    if (customTask.length > 5) {
-      setTodos([...todos, customTask]);
-      setCustomTask('');
-    } else {
-      alert('Task must be more than 5 characters');
+                <UseMemoComponent />
+                <ReactMemoComponent />
+            </div>
+        );
     }
-  };
-
-  return (
-    <div className="app">
-      <h1>Task Manager</h1>
-      <button onClick={addTodo}>Add todo</button>
-      <button onClick={incrementCounter}>Increment</button>
-      <p>Counter: {counter}</p>
-
-      <input
-        type="text"
-        placeholder="Enter custom task"
-        value={customTask}
-        onChange={handleCustomTaskInput}
-      />
-      <button onClick={submitCustomTask}>Submit</button>
-
-      <h2>Tasks:</h2>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>{todo}</li>
-        ))}
-      </ul>
-
-      <UseMemoComponent counter={counter} />
-      <ReactMemoComponent todos={todos} />
-    </div>
-  );
-};
+}
 
 export default App;
