@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';  // Ensure this is pointing to the correct location of App.js
+import App from './components/App';  // Corrected path
 
 ReactDOM.render(
   <React.StrictMode>
@@ -8,3 +8,4 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+npm

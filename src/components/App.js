@@ -1,83 +1,61 @@
-import React, { useState, useMemo } from 'react';
-import ReactMemo from './ReactMemo';
-import UseMemo from './UseMemo';     
+import React, { useState, useEffect } from 'react';
+import UseMemoComponent from './UseMemo';
+import ReactMemoComponent from './ReactMemo';
 
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [counter, setCounter] = useState(0);
-  const [task, setTask] = useState('');
-  const [skill, setSkill] = useState('');
+  const [customTask, setCustomTask] = useState('');
 
-  // Adding a new todo
+  // Add a new todo task "New todo"
   const addTodo = () => {
     setTodos([...todos, 'New todo']);
   };
 
-  // Increment counter
+  // Increment the counter
   const incrementCounter = () => {
     setCounter(counter + 1);
   };
 
-  // Adding custom task based on input
-  const addCustomTask = () => {
-    if (task.length > 5) {
-      setTodos([...todos, task]);
-      setTask('');
+  // Handle custom task input
+  const handleCustomTaskInput = (e) => {
+    setCustomTask(e.target.value);
+  };
+
+  // Add custom task to the list
+  const submitCustomTask = () => {
+    if (customTask.length > 5) {
+      setTodos([...todos, customTask]);
+      setCustomTask('');
+    } else {
+      alert('Task must be more than 5 characters');
     }
   };
 
-  // Task list rendering with useMemo
-  const memoizedTodos = useMemo(() => {
-    return todos;
-  }, [todos]);
-
   return (
-    <div id="main">
-      <h1>React Memo Assignment</h1>
-
-      {/* Add todo button */}
-      <button id="add-todo-btn" onClick={addTodo}>
-        Add todo
-      </button>
-
-      {/* Increment button */}
-      <button id="incr-cnt" onClick={incrementCounter}>
-        Increment Counter
-      </button>
-
-      {/* Counter */}
+    <div className="app">
+      <h1>Task Manager</h1>
+      <button onClick={addTodo}>Add todo</button>
+      <button onClick={incrementCounter}>Increment</button>
       <p>Counter: {counter}</p>
 
-      {/* Custom task input */}
       <input
-        id="task-input"
         type="text"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-        placeholder="Enter a task (min 6 chars)"
+        placeholder="Enter custom task"
+        value={customTask}
+        onChange={handleCustomTaskInput}
       />
-      <button id="submit-task-btn" onClick={addCustomTask}>
-        Submit Task
-      </button>
+      <button onClick={submitCustomTask}>Submit</button>
 
-      {/* List of Todos */}
+      <h2>Tasks:</h2>
       <ul>
-        {memoizedTodos.map((todo, index) => (
+        {todos.map((todo, index) => (
           <li key={index}>{todo}</li>
         ))}
       </ul>
 
-      {/* React.memo Example: Skill Adding */}
-      <input
-        id="skill-input"
-        type="text"
-        value={skill}
-        onChange={(e) => setSkill(e.target.value)}
-        placeholder="Enter a skill"
-      />
-      <ReactMemo skill={skill} />
-
-      <UseMemo counter={counter} />
+      <UseMemoComponent counter={counter} />
+      <ReactMemoComponent todos={todos} />
     </div>
   );
 };
