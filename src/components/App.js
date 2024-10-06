@@ -1,43 +1,37 @@
-import React, { Component } from 'react';
-import UseMemoComponent from './UseMemo';
-import ReactMemoComponent from './ReactMemo';
+import React, { useState } from "react";
+import TaskList from "./TaskList";
+import UseMemoExample from "./UseMemo";
+import ReactMemoExample from "./ReactMemo";
 
-class App extends Component {
-    state = {
-        counter: 0,
-        todos: ['Initial todo']
-    };
+const App = () => {
+  const [counter, setCounter] = useState(0);
+  const [tasks, setTasks] = useState(["New todo"]);
 
-    handleAddTodo = () => {
-        this.setState((prevState) => ({
-            todos: [...prevState.todos, 'New todo']
-        }));
-    };
+  const addTodo = () => {
+    setTasks([...tasks, "New todo"]);
+  };
 
-    handleIncrement = () => {
-        this.setState((prevState) => ({
-            counter: prevState.counter + 1
-        }));
-    };
+  const incrementCounter = () => {
+    setCounter(counter + 1);
+  };
 
-    render() {
-        return (
-            <div>
-                <h1>React Memo Assignment</h1>
-                <button id="add-todo-btn" onClick={this.handleAddTodo}>Add Todo</button>
-                <button id="incr-cnt" onClick={this.handleIncrement}>Increment</button>
-                <ul>
-                    {this.state.todos.map((todo, index) => (
-                        <li key={index}>{todo}</li>
-                    ))}
-                </ul>
-                <p>Counter: {this.state.counter}</p>
+  return (
+    <div>
+      <h1>Todo App</h1>
+      <button id="add-todo-btn" onClick={addTodo}>
+        Add Todo
+      </button>
+      <TaskList tasks={tasks} />
+      
+      <button id="incr-cnt" onClick={incrementCounter}>
+        Increment Counter
+      </button>
+      <p>Counter: {counter}</p>
 
-                <UseMemoComponent />
-                <ReactMemoComponent />
-            </div>
-        );
-    }
-}
+      <UseMemoExample />
+      <ReactMemoExample />
+    </div>
+  );
+};
 
 export default App;

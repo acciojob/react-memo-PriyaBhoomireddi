@@ -1,14 +1,13 @@
-import React from 'react';
+import React from "react";
 
-const TaskList = React.memo(({ tasks }) => {
-    console.log("Rendering TaskList...");
-    return (
-        <ul>
-            {tasks.map((task, index) => (
-                <li key={index}>{task}</li>
-            ))}
-        </ul>
-    );
-});
+const TaskList = ({ tasks }) => {
+  return (
+    <ul>
+      {tasks.map((task, index) => (
+        <li key={index}>{task}</li>
+      ))}
+    </ul>
+  );
+};
 
-export default TaskList;
+export default React.memo(TaskList);

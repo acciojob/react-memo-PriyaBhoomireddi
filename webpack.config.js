@@ -2,7 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/components/index.js',  // Adjusted the path
+
     output: {
         path: path.join(__dirname, "/dist"),
         filename: "index_bundle.js",
@@ -13,11 +14,7 @@ module.exports = {
                 test: /\.js$|\.jsx$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react'],
-                        plugins: ['@babel/plugin-proposal-class-properties']
-                    }
+                    loader: 'babel-loader'
                 }
             },
             {

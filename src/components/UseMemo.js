@@ -1,22 +1,37 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState, useMemo } from "react";
 
-const UseMemoComponent = () => {
-    const [count, setCount] = useState(0);
+const UseMemoExample = () => {
+  const [inputValue, setInputValue] = useState("");
+  const [tasks, setTasks] = useState([]);
 
-    const expensiveCalculation = (num) => {
-        console.log("Calculating...");
-        return num * 2;
-    };
+  const addTask = () => {
+    if (inputValue.length > 5) {
+      setTasks([...tasks, inputValue]);
+      setInputValue("");
+    }
+  };
 
-    const result = useMemo(() => expensiveCalculation(count), [count]);
+  const memoizedTasks = useMemo(() => tasks, [tasks]);
 
-    return (
-        <div>
-            <h2>UseMemo Example</h2>
-            <p>Result: {result}</p>
-            <button id="incr-cnt" onClick={() => setCount(count + 1)}>Increment Count</button>
-        </div>
-    );
+  return (
+    <div>
+      <h2>UseMemo Example</h2>
+      <input
+        type="text"
+        id="task-input"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <button id="add-task-btn" onClick={addTask}>
+        Submit
+      </button>
+      <ul>
+        {memoizedTasks.map((task, index) => (
+          <li key={index}>{task}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
-export default UseMemoComponent;
+export default UseMemoExample;

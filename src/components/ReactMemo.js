@@ -1,38 +1,35 @@
-import React, { useState } from 'react';
-import TaskList from './TaskList';
+import React, { useState } from "react";
 
-const ReactMemoComponent = () => {
-    const [task, setTask] = useState('');
-    const [tasks, setTasks] = useState([]);
+const ReactMemoExample = () => {
+  const [skill, setSkill] = useState("");
+  const [skills, setSkills] = useState([]);
 
-    const handleInputChange = (e) => {
-        setTask(e.target.value);
-    };
+  const addSkill = () => {
+    if (skill) {
+      setSkills([...skills, skill]);
+      setSkill("");
+    }
+  };
 
-    const handleAddTask = () => {
-        if (task.length > 5) {
-            setTasks([...tasks, task]);
-            setTask('');
-        } else {
-            alert('Task must be more than 5 characters');
-        }
-    };
-
-    return (
-        <div>
-            <h2>React Memo Example</h2>
-            <input
-                id="skill-input"
-                type="text"
-                value={task}
-                onChange={handleInputChange}
-                placeholder="Enter a task"
-            />
-            <button id="add-skill-btn" onClick={handleAddTask}>Add Task</button>
-
-            <TaskList tasks={tasks} />
-        </div>
-    );
+  return (
+    <div>
+      <h2>React Memo Example</h2>
+      <input
+        type="text"
+        id="skill-input"
+        value={skill}
+        onChange={(e) => setSkill(e.target.value)}
+      />
+      <button id="add-skill-btn" onClick={addSkill}>
+        Add Skill
+      </button>
+      <ul>
+        {skills.map((skill, index) => (
+          <li key={index}>{skill}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
-export default ReactMemoComponent;
+export default React.memo(ReactMemoExample);
