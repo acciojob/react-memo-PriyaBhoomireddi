@@ -1,14 +1,13 @@
 const path = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const HtmlWebpackPlugin= require('html-webpack-plugin');
 module.exports = {
-    entry: './src/components/index.js',  // Adjusted the path
+    entry: './src/index.js',
 
     output: {
-        path: path.join(__dirname, "/dist"),
+        path: path.join(__dirname,"/dist"),
         filename: "index_bundle.js",
     },
-    module: {
+    module:{
         rules: [
             {
                 test: /\.js$|\.jsx$/,

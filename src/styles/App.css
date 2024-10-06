@@ -1,10 +1,12 @@
-.app {
-    text-align: center;
-    padding: 20px;
+h1 {
+  color: #27aedb;
+  text-align: center;
   }
   
-  input {
-    margin: 10px;
-    padding: 5px;
-  }
-  
+
+button{
+  color: #27aedb;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
