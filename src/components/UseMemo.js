@@ -1,37 +1,49 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo, useState } from 'react';
 
-const UseMemoExample = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [tasks, setTasks] = useState([]);
+const UseMemo = () => {
+    const [todos, setTodos] = useState(["New Todo"]);
 
-  const addTask = () => {
-    if (inputValue) {
-      setTasks([...tasks, inputValue]);
-      setInputValue("");
-    }
-  };
+    const [count, setCount] = useState(0);
+    
 
-  const memoizedTasks = useMemo(() => tasks, [tasks]);
+    return (
+        <div>
+            <h2>My todos</h2>
+            <div className='todos'>
+                {
+                    todos.map((todo, index) => {
+                        return <div id={"todo-" + index} key={index}>{todo}</div>
+                    })
+                }
+            </div>
 
-  return (
-    <div>
-      <h2>Use Memo</h2>
-      <input
-        type="text"
-        id="task-input"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button id="add-task-btn" onClick={addTask}>
-        Add Task
-      </button>
-      <ul>
-        {memoizedTasks.map((task, index) => (
-          <li key={index}>{task}</li>
-        ))}
-      </ul>
-    </div>
-  );
+            <button id="add-todo-btn"
+                onClick={() => {
+                    setTodos([...todos, "New Todo"]); 
+                }}
+            >Add todo</button>
+
+            <hr />
+
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <p>Count: <span id="incr-cnt">{count}</span></p>
+                <button value = "+" id="incr-btn" 
+                style={{ 
+                    marginLeft: '10px', 
+                    width: '20px', 
+                    height: '20px', 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'center' 
+                    }} onClick={() => setCount(count + 1)}>+</button>
+            </div>
+            <h1>Expensive Calculation</h1>
+          
+            <p id="calc">{1000000000+count}</p>
+            <hr />
+            <hr />
+        </div>
+    );
 };
 
-export default UseMemoExample;
+export default UseMemo;
