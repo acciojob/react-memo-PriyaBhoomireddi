@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import TaskList from "./TaskList";
 import UseMemoExample from "./UseMemo";
 import ReactMemoExample from "./ReactMemo";
 
 const App = () => {
-  const [counter, setCounter] = useState(0);
   const [tasks, setTasks] = useState(["New todo"]);
+  const [counter, setCounter] = useState(0);
 
   const addTodo = () => {
     setTasks([...tasks, "New todo"]);
@@ -21,8 +20,11 @@ const App = () => {
       <button id="add-todo-btn" onClick={addTodo}>
         Add Todo
       </button>
-      <TaskList tasks={tasks} />
-      
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>{task}</li>
+        ))}
+      </ul>
       <button id="incr-cnt" onClick={incrementCounter}>
         Increment Counter
       </button>

@@ -13,7 +13,7 @@ const ReactMemoExample = () => {
 
   return (
     <div>
-      <h2>React Memo Example</h2>
+      <h2>React Memo</h2>
       <input
         type="text"
         id="skill-input"

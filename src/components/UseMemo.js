@@ -5,7 +5,7 @@ const UseMemoExample = () => {
   const [tasks, setTasks] = useState([]);
 
   const addTask = () => {
-    if (inputValue.length > 5) {
+    if (inputValue) {
       setTasks([...tasks, inputValue]);
       setInputValue("");
     }
@@ -15,7 +15,7 @@ const UseMemoExample = () => {
 
   return (
     <div>
-      <h2>UseMemo Example</h2>
+      <h2>Use Memo</h2>
       <input
         type="text"
         id="task-input"
@@ -23,7 +23,7 @@ const UseMemoExample = () => {
         onChange={(e) => setInputValue(e.target.value)}
       />
       <button id="add-task-btn" onClick={addTask}>
-        Submit
+        Add Task
       </button>
       <ul>
         {memoizedTasks.map((task, index) => (
